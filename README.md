@@ -12,3 +12,15 @@ that shows examples with mutation rates of 0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0
 
 ![](example_24_314/errors.png)
 
+![](example_24_315/errors.png)
+
+![](example_24_316/errors.png)
+
+![](example_24_317/errors.png)
+
+![](example_24_318/errors.png)
+
+![](example_24_319/errors.png)
+
+![](example_24_320/errors.png)
+
