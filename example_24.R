@@ -5,6 +5,11 @@
 suppressMessages(library(pirouette))
 suppressMessages(library(ggplot2))
 
+################################################################################
+# Constants
+################################################################################
+is_testing <- is_on_travis()
+
 root_folder <- getwd()
 example_no <- 24
 
@@ -27,65 +32,24 @@ for (rng_seed in seq(314, 320)) {
 
   print(rng_seed)
 
-  example_folder <- file.path(root_folder, paste0("example_", example_no, "_", rng_seed))
-  dir.create(example_folder, showWarnings = FALSE, recursive = TRUE)
-  setwd(example_folder)
+  folder_name <- file.path(paste0("example_", example_no, "_", rng_seed))
+
   set.seed(rng_seed)
-  testit::assert(is_beast2_installed())
   phylogeny <- create_yule_tree(n_taxa = 6, crown_age = 10)
 
-  alignment_params <- create_alignment_params(
-    sim_tral_fun = get_sim_tral_with_std_nsm_fun(
-      mutation_rate = seed_to_mutation_rate(rng_seed),
-      site_model = beautier::create_jc69_site_model()
-    ),
-    root_sequence = create_blocked_dna(length = 1000),
-    rng_seed = rng_seed,
-    fasta_filename = "true_alignment.fas"
+  pir_params <- create_std_pir_params(folder_name = folder_name)
+  pir_params$alignment_params$sim_tral_fun <- get_sim_tral_with_std_nsm_fun(
+    mutation_rate = seed_to_mutation_rate(rng_seed),
+    site_model = beautier::create_jc69_site_model()
+  )
+  pir_params$twinning_params$sim_twal_fun <- get_sim_twal_same_n_muts_fun(
+    mutation_rate = seed_to_mutation_rate(rng_seed),
+    max_n_tries = 1000
   )
 
-  experiment <- create_gen_experiment()
-  experiment$beast2_options$input_filename <- "true_alignment_gen.xml"
-  experiment$beast2_options$output_state_filename <- "true_alignment_gen.xml.state"
-  experiment$inference_model$mcmc$tracelog$filename <- "true_alignment_gen.log"
-  experiment$inference_model$mcmc$treelog$filename <- "true_alignment_gen.trees"
-  experiment$inference_model$mcmc$screenlog$filename <- "true_alignment_gen.csv"
-  experiment$errors_filename <- "true_errors_gen.csv"
-  experiments <- list(experiment)
-
-  # Set the RNG seed
-  for (i in seq_along(experiments)) {
-    experiments[[i]]$beast2_options$rng_seed <- rng_seed
+  if (is_testing) {
+    pir_params <- shorten_pir_params(pir_params)
   }
-
-  # Shorter on Travis
-  if (is_on_travis()) {
-    for (i in seq_along(experiments)) {
-      experiments[[i]]$inference_model$mcmc$chain_length <- 3000
-      experiments[[i]]$inference_model$mcmc$store_every <- 1000
-    }
-  }
-
-  twinning_params <- create_twinning_params(
-    rng_seed_twin_tree = rng_seed,
-    sim_twin_tree_fun = get_sim_bd_twin_tree_fun(),
-    rng_seed_twin_alignment = rng_seed,
-    sim_twal_fun = get_sim_twal_same_n_muts_fun(
-      mutation_rate = seed_to_mutation_rate(rng_seed),
-      max_n_tries = 1000
-    ),
-    twin_tree_filename = "twin_tree.newick",
-    twin_alignment_filename = "twin_alignment.fas",
-    twin_evidence_filename = "twin_evidence.csv"
-  )
-
-  pir_params <- create_pir_params(
-    alignment_params = alignment_params,
-    experiments = experiments,
-    twinning_params = twinning_params
-  )
-
-  rm_pir_param_files(pir_params)
 
   errors <- pir_run(
     phylogeny,
