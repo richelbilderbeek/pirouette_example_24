@@ -3,7 +3,6 @@
 # Add worked examples with mutation rates from
 # 0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8
 suppressMessages(library(pirouette))
-suppressMessages(library(ggplot2))
 
 ################################################################################
 # Constants
@@ -57,6 +56,7 @@ for (rng_seed in seq(314, 320)) {
 
   pir_save(
     phylogeny = phylogeny,
+    pir_params = pir_params,
     pir_out = pir_out,
     folder_name = folder_name
   )
