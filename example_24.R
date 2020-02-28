@@ -10,7 +10,6 @@ suppressMessages(library(ggplot2))
 ################################################################################
 is_testing <- is_on_travis()
 
-root_folder <- getwd()
 example_no <- 24
 
 seed_to_mutation_rate <- function(rng_seed) {
@@ -32,7 +31,7 @@ for (rng_seed in seq(314, 320)) {
 
   print(rng_seed)
 
-  folder_name <- file.path(paste0("example_", example_no, "_", rng_seed))
+  folder_name <- paste0("example_", example_no, "_", rng_seed)
 
   set.seed(rng_seed)
   phylogeny <- create_yule_tree(n_taxa = 6, crown_age = 10)
