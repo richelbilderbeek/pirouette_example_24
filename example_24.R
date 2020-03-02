@@ -2,50 +2,72 @@
 #
 # Add worked examples with mutation rates from
 # 0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8
-suppressMessages(library(pirouette))
+library(pirouette)
+library(beautier)
 
 # Constants
-is_testing <- is_on_travis()
 example_no <- 24
-seed_to_mutation_rate <- function(rng_seed) {
-  mutation_rates <- c(0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8)
-  mutation_rate <- mutation_rates[rng_seed + 1 - 314]
-  if (is.na(mutation_rate)) stop("Invalid seed")
-  mutation_rate
+rng_seed <- 314
+crown_age <- 10
+mutation_rates <- c(0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8)
+n_phylogenies_per_mutation_rate <- 5
+is_testing <- is_on_travis()
+if (is_testing) {
+  mutation_rates <- c(100, 248)
+  n_phylogenies_per_mutation_rate <- 2
 }
-testthat::expect_equal(seed_to_mutation_rate(314), 0.0125)
-testthat::expect_equal(seed_to_mutation_rate(315), 0.025)
-testthat::expect_equal(seed_to_mutation_rate(316), 0.05)
-testthat::expect_equal(seed_to_mutation_rate(317), 0.1)
-testthat::expect_equal(seed_to_mutation_rate(318), 0.2)
-testthat::expect_equal(seed_to_mutation_rate(319), 0.4)
-testthat::expect_equal(seed_to_mutation_rate(320), 0.8)
-testthat::expect_error(seed_to_mutation_rate(321))
-for (rng_seed in seq(314, 320)) {
-  print(rng_seed)
-  folder_name <- paste0("example_", example_no, "_", rng_seed)
+n_mutation_rates <- length(mutation_rates)
+n_pir_params <- n_mutation_rates * n_phylogenies_per_mutation_rate
+
+# Create phylogenies
+phylogenies <- list()
+for (i in seq_len(n_phylogenies_per_mutation_rate)) {
   set.seed(rng_seed)
   phylogeny <- create_yule_tree(n_taxa = 6, crown_age = 10)
-  pir_params <- create_std_pir_params(folder_name = folder_name)
-  pir_params$alignment_params$sim_tral_fun <- get_sim_tral_with_std_nsm_fun(
-    mutation_rate = seed_to_mutation_rate(rng_seed),
+  phylogenies[[i]] <- phylogeny
+}
+# 1 2 3 1 2 3
+phylogenies <- rep(phylogenies, n_phylogenies_per_mutation_rate)
+
+# Create pirouette parameter sets
+pir_paramses <- create_std_pir_paramses(n = n_pir_params)
+expect_equal(length(pir_paramses), length(phylogenies))
+if (is_testing) {
+  pir_paramses <- shorten_pir_params(pir_paramses)
+}
+
+# Set the alignment lengths
+# 1 1 1 2 2 2
+mutation_rateses <- rep(
+  mutation_rates, each = n_phylogenies_per_mutation_rate
+)
+expect_equal(length(mutation_rateses), length(pir_paramses))
+for (i in seq_along(mutation_rateses)) {
+
+  pir_paramses[[i]]$alignment_params$sim_tral_fun <- get_sim_tral_with_std_nsm_fun(
+    mutation_rate = mutation_rateses[[i]],
     site_model = beautier::create_jc69_site_model()
   )
-  pir_params$twinning_params$sim_twal_fun <- get_sim_twal_same_n_muts_fun(
-    mutation_rate = seed_to_mutation_rate(rng_seed),
+  pir_paramses[[i]]$twinning_params$sim_twal_fun <- get_sim_twal_same_n_muts_fun(
+    mutation_rate = mutation_rateses[[i]],
     max_n_tries = 1000
   )
-  if (is_testing) {
-    pir_params <- shorten_pir_params(pir_params)
-  }
-  pir_out <- pir_run(
-    phylogeny,
-    pir_params = pir_params
-  )
+}
+
+# Do the runs
+pir_outs <- pir_runs(
+  phylogenies = phylogenies,
+  pir_paramses = pir_paramses
+)
+
+# Save
+expect_equal(length(pir_paramses), length(pir_outs))
+expect_equal(length(pir_paramses), length(phylogenies))
+for (i in seq_along(pir_outs)) {
   pir_save(
-    phylogeny = phylogeny,
-    pir_params = pir_params,
-    pir_out = pir_out,
-    folder_name = folder_name
+    phylogeny = phylogenies[[i]],
+    pir_params = pir_paramses[[i]],
+    pir_out = pir_outs[[i]],
+    folder_name = dirname(pir_paramses[[i]]$alignment_params$fasta_filename)
   )
 }
