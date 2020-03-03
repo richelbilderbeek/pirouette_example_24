@@ -4,6 +4,8 @@
 # 0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8
 library(pirouette)
 library(beautier)
+library(beastier)
+library(testthat)
 
 # Constants
 example_no <- 24
