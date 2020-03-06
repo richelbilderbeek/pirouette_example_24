@@ -35,7 +35,7 @@ phylogenies <- rep(phylogenies, n_phylogenies_per_mutation_rate)
 pir_paramses <- create_std_pir_paramses(n = n_pir_params)
 expect_equal(length(pir_paramses), length(phylogenies))
 if (is_testing) {
-  pir_paramses <- shorten_pir_params(pir_paramses)
+  pir_paramses <- shorten_pir_paramses(pir_paramses)
 }
 
 # Set the alignment lengths
