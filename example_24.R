@@ -13,7 +13,7 @@ rng_seed <- 314
 crown_age <- 10
 mutation_rates <- c(0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8)
 n_phylogenies_per_mutation_rate <- 5
-is_testing <- is_on_travis()
+is_testing <- is_on_ci()
 if (is_testing) {
   mutation_rates <- c(100, 248)
   n_phylogenies_per_mutation_rate <- 2
