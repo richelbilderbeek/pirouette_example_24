@@ -32,6 +32,7 @@ for (i in seq_len(n_phylogenies_per_mutation_rate)) {
 }
 # 1 2 3 1 2 3
 phylogenies <- rep(phylogenies, n_mutation_rates)
+expect_equal(n_pir_params, length(phylogenies))
 
 # Create pirouette parameter sets
 pir_paramses <- create_std_pir_paramses(
@@ -69,7 +70,7 @@ pir_outs <- pir_runs(
 
 # Save summary
 pir_plots(pir_outs) +
-  ggtitle(paste("Number of replicates: ", n_phylogenies)) +
+  ggtitle(paste("Number of pir_params: ", n_pir_params)) +
   ggsave(file.path(folder_name, "errors.png"), width = 7, height = 7)
 
 # Save
