@@ -13,6 +13,7 @@ rng_seed <- 314
 crown_age <- 10
 mutation_rates <- c(0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8)
 n_phylogenies_per_mutation_rate <- 5
+folder_name <- paste0("example_", example_no)
 is_testing <- is_on_ci()
 if (is_testing) {
   mutation_rates <- c(100, 248)
@@ -29,10 +30,13 @@ for (i in seq_len(n_phylogenies_per_mutation_rate)) {
   phylogenies[[i]] <- phylogeny
 }
 # 1 2 3 1 2 3
-phylogenies <- rep(phylogenies, n_phylogenies_per_mutation_rate)
+phylogenies <- rep(phylogenies, n_mutation_rates)
 
 # Create pirouette parameter sets
-pir_paramses <- create_std_pir_paramses(n = n_pir_params)
+pir_paramses <- create_std_pir_paramses(
+  n = n_pir_params,
+  folder_name = folder_name
+)
 expect_equal(length(pir_paramses), length(phylogenies))
 if (is_testing) {
   pir_paramses <- shorten_pir_paramses(pir_paramses)
@@ -61,6 +65,11 @@ pir_outs <- pir_runs(
   phylogenies = phylogenies,
   pir_paramses = pir_paramses
 )
+
+# Save summary
+pir_plots(pir_outs) +
+  ggtitle(paste("Number of replicates: ", n_phylogenies)) +
+  ggsave(file.path(folder_name, "errors.png"), width = 7, height = 7)
 
 # Save
 expect_equal(length(pir_paramses), length(pir_outs))
