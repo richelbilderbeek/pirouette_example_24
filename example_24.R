@@ -6,7 +6,7 @@ library(pirouette)
 library(beautier)
 library(beastier)
 library(testthat)
-library(ggplot)
+library(ggplot2)
 
 # Constants
 example_no <- 24
