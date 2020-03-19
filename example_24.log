@@ -1,0 +1,90 @@
+Loading required package: beautier
+Loading required package: babette
+Loading required package: beastier
+Loading required package: mauricer
+Loading required package: tracerer
+Registered S3 method overwritten by 'pryr':
+  method      from
+  print.bytes Rcpp
+Warning messages:
+1: In pirouette::sim_alignment_with_n_mutations(phylogeny = twin_phylogeny,  :
+  'sim_alignment_with_n_mutations' tried 1000 times, without simulating an alignment with 1400 mutations
+2: In pirouette::sim_alignment_with_n_mutations(phylogeny = twin_phylogeny,  :
+  'sim_alignment_with_n_mutations' tried 1000 times, without simulating an alignment with 1378 mutations
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+Saving 7 x 7 in image
+
+real	1348m34.469s
+user	1240m41.981s
+sys	31m37.467s
+
+
+###############################################################################
+Peregrine Cluster
+Job 10159833 for user 'p230198'
+Finished at: Wed Mar 18 12:35:37 CET 2020
+
+Job details:
+============
+
+Name                : pirex24
+User                : p230198
+Partition           : regular
+Nodes               : pg-node014
+Cores               : 1
+State               : COMPLETED
+Submit              : 2020-03-17T14:07:01
+Start               : 2020-03-17T14:07:01
+End                 : 2020-03-18T12:35:37
+Reserved walltime   : 1-00:00:00
+Used walltime       :   22:28:36
+Used CPU time       :   21:12:28 (efficiency: 94.35%)
+% User (Computation): 97.51%
+% System (I/O)      :  2.49%
+Mem reserved        : 10G/node
+Max Mem used        : 1.10G (pg-node014)
+Max Disk Write      : 71.68K (pg-node014)
+Max Disk Read       : 1.35M (pg-node014)
+
+
+Acknowledgements:
+=================
+
+Please see this page for information about acknowledging Peregrine in your publications:
+
+https://wiki.hpc.rug.nl/peregrine/additional_information/scientific_output
+
+################################################################################
