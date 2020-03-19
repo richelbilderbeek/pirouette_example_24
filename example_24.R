@@ -13,7 +13,7 @@ example_no <- 24
 rng_seed <- 314
 crown_age <- 10
 mutation_rates <- c(0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8)
-n_phylogenies_per_mutation_rate <- 5
+n_phylogenies_per_mutation_rate <- 2
 folder_name <- paste0("example_", example_no)
 is_testing <- is_on_ci()
 if (is_testing) {
@@ -71,7 +71,20 @@ pir_outs <- pir_runs(
 # Save summary
 pir_plots(pir_outs) +
   ggtitle(paste("Number of pir_params: ", n_pir_params)) +
-  ggsave(file.path(folder_name, "errors.png"), width = 7, height = 7)
+  ggsave("errors.png", width = 7, height = 7)
+
+# Save useful
+for (i in seq_along(n_mutation_rates)) {
+  n <- mutation_rates[i]
+  from_index <- ((i - 1) * n_phylogenies_per_mutation_rate) + 1
+  to_index <- ((i - 1) * n_phylogenies_per_mutation_rate) + n_phylogenies_per_mutation_rate
+  pir_plots(
+    pir_outs = pir_outs[from_index:to_index]
+  ) + ggtitle(
+      paste("Mutation rate: ", n, ", number of replicates:", n_phylogenies_per_mutation_rate)
+  ) +
+    ggsave(filename = paste0("errors_", i, ".png"), width = 7, height = 7)
+}
 
 # Save
 expect_equal(length(pir_paramses), length(pir_outs))
