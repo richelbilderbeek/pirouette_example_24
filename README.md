@@ -8,33 +8,37 @@ Branch   |[![Travis CI logo](pics/TravisCI.png)](https://travis-ci.org)         
 A [pirouette example](https://github.com/richelbilderbeek/pirouette_examples) 
 that shows examples with mutation rates of 0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0.8.
 
-## Results
+## Summary
+
+![](example_24/errors.png)
+
+### Individual
 
 Per-nucleotide mutation rate of 0.0125:
 
-![](example_24_314/errors.png)
+![](example_24/314/errors.png)
 
 Per-nucleotide mutation rate of 0.025:
 
-![](example_24_315/errors.png)
+![](example_24/315/errors.png)
 
 Per-nucleotide mutation rate of 0.05:
 
-![](example_24_316/errors.png)
+![](example_24/316/errors.png)
 
 Per-nucleotide mutation rate of 0.1:
 
-![](example_24_317/errors.png)
+![](example_24/317/errors.png)
 
 Per-nucleotide mutation rate of 0.2:
 
-![](example_24_318/errors.png)
+![](example_24/318/errors.png)
 
 Per-nucleotide mutation rate of 0.4:
 
-![](example_24_319/errors.png)
+![](example_24/319/errors.png)
 
 Per-nucleotide mutation rate of 0.8:
 
-![](example_24_320/errors.png)
+![](example_24/320/errors.png)
 
