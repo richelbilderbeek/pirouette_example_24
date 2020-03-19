@@ -38,3 +38,7 @@ true.*
 beast2_*
 example_1_314/Rplots.pdf
 Rplots.pdf
+example_24/*/*.xml
+example_24/*/*.xml.state
+example_24/*/*.trees
+example_24/*/*.log

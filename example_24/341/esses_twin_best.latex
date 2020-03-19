@@ -1,0 +1,24 @@
+% latex table generated in R 3.6.1 by xtable 1.8-4 package
+% Wed Mar 18 12:26:49 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+  \hline
+parameter & ESS \\ 
+  \hline
+posterior & 9599 \\ 
+  likelihood & 9964 \\ 
+  prior & 768 \\ 
+  treeLikelihood & 9964 \\ 
+  TreeHeight & 7295 \\ 
+  ucldStdev & 179 \\ 
+  rate.mean & 4311 \\ 
+  rate.variance & 159 \\ 
+  rate.coefficientOfVariation & 182 \\ 
+  BirthDeath & 6184 \\ 
+  BDBirthRate & 5979 \\ 
+  BDDeathRate & 5167 \\ 
+   \hline
+\end{tabular}
+\caption{ESSes for best candidate model, twin tree} 
+\end{table}

@@ -1,0 +1,20 @@
+% latex table generated in R 3.6.1 by xtable 1.8-4 package
+% Wed Mar 18 12:34:11 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+  \hline
+parameter & ESS \\ 
+  \hline
+posterior & 8797 \\ 
+  likelihood & 9902 \\ 
+  prior & 4904 \\ 
+  treeLikelihood & 9902 \\ 
+  TreeHeight & 4295 \\ 
+  BirthDeath & 4904 \\ 
+  BDBirthRate & 5872 \\ 
+  BDDeathRate & 6381 \\ 
+   \hline
+\end{tabular}
+\caption{ESSes for best candidate model} 
+\end{table}

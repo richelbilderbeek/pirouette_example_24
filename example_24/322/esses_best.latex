@@ -1,0 +1,23 @@
+% latex table generated in R 3.6.1 by xtable 1.8-4 package
+% Wed Mar 18 12:05:02 2020
+\begin{table}[ht]
+\centering
+\begin{tabular}{ll}
+  \hline
+parameter & ESS \\ 
+  \hline
+posterior & 9871 \\ 
+  likelihood & 10001 \\ 
+  prior & 2852 \\ 
+  treeLikelihood & 10001 \\ 
+  TreeHeight & 7577 \\ 
+  ucldStdev & 2058 \\ 
+  rate.mean & 4362 \\ 
+  rate.variance & 1458 \\ 
+  rate.coefficientOfVariation & 2186 \\ 
+  YuleModel & 8668 \\ 
+  birthRate & 9219 \\ 
+   \hline
+\end{tabular}
+\caption{ESSes for best candidate model} 
+\end{table}
