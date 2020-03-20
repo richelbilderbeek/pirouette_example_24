@@ -43,3 +43,4 @@ example_24/*/*.xml.state
 example_24/*/*.trees
 example_24/*/*.log
 example_24/
+*.zip
