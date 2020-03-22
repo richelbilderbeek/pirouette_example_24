@@ -74,7 +74,7 @@ pir_plots(pir_outs) +
   ggsave("errors.png", width = 7, height = 7)
 
 # Save useful
-for (i in seq_along(n_mutation_rates)) {
+for (i in seq_along(mutation_rates)) {
   n <- mutation_rates[i]
   from_index <- ((i - 1) * n_phylogenies_per_mutation_rate) + 1
   to_index <- ((i - 1) * n_phylogenies_per_mutation_rate) + n_phylogenies_per_mutation_rate
