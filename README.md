@@ -16,29 +16,29 @@ that shows examples with mutation rates of 0.0125, 0.025, 0.05, 0.1, 0.2, 0.4, 0
 
 Per-nucleotide mutation rate of 0.0125:
 
-![](example_24/314/errors.png)
+![](example_24/errors_1.png)
 
 Per-nucleotide mutation rate of 0.025:
 
-![](example_24/315/errors.png)
+![](example_24/errors_2.png)
 
 Per-nucleotide mutation rate of 0.05:
 
-![](example_24/316/errors.png)
+![](example_24/errors_3.png)
 
 Per-nucleotide mutation rate of 0.1:
 
-![](example_24/317/errors.png)
+![](example_24/errors_4.png)
 
 Per-nucleotide mutation rate of 0.2:
 
-![](example_24/318/errors.png)
+![](example_24/errors_5.png)
 
 Per-nucleotide mutation rate of 0.4:
 
-![](example_24/319/errors.png)
+![](example_24/errors_6.png)
 
 Per-nucleotide mutation rate of 0.8:
 
-![](example_24/320/errors.png)
+![](example_24/errors_7.png)
 
