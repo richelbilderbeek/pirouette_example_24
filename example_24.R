@@ -70,8 +70,7 @@ pir_outs <- pir_runs(
 
 # Save summary
 pir_plots(pir_outs) +
-  ggtitle(paste("Number of pir_params: ", n_pir_params)) +
-  ggsave("errors.png", width = 7, height = 7)
+  ggtitle(paste("Number of pir_params: ", n_pir_params)); ggsave("errors.png", width = 7, height = 7)
 
 # Save useful
 for (i in seq_along(mutation_rates)) {
@@ -82,8 +81,7 @@ for (i in seq_along(mutation_rates)) {
     pir_outs = pir_outs[from_index:to_index]
   ) + ggtitle(
       paste("Mutation rate: ", n, ", number of replicates:", n_phylogenies_per_mutation_rate)
-  ) +
-    ggsave(filename = paste0("errors_", i, ".png"), width = 7, height = 7)
+  ); ggsave(filename = paste0("errors_", i, ".png"), width = 7, height = 7)
 }
 
 # Save
